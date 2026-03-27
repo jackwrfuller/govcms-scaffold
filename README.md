@@ -1,28 +1,25 @@
-# GovCMS Project Scaffolding
+# govcms
 
-This codebase provides a Drupal GovCMS site ready for
-hosting on the GovCMS platform (Lagoon).
+- **Project:** govcms
+- **Version:** 11
+- **SaaS or PaaS:** saas
+- **Local Dev URL:** [http://govcms.docker.amazee.io/](http://govcms.docker.amazee.io/)
 
-**Note**: If you are a new GovCMS customer visiting this page on
-[Github](https://github.com/govcms/scaffold)
-you may prefer to wait for the GovCMS service desk to create your project in Gitlab.
+## Useful links
 
-To make this codebase function you must first initialise it.
-```
-ahoy init project_name type version
-```
+- [Govcms.gov.au](https://govcms.gov.au)
+- [Statuspage](https://status.govcms.gov.au)
+- [Service desk](https://support.govcms.gov.au)
 
- * `type`: May be `saas` or `paas`
- * `version`: May be `10` or `11`
+## Basic commands
 
-## Next steps
+To find a list of all ahoy commands, check the .ahoy.yml file, or run `ahoy` in command line.
 
- * [Drupal/GovCMS distribution](https://govcms.gov.au/wiki-distro)
- * [GovCMS Platform](https://govcms.gov.au/wiki-platform)
- * [GovCMS Maintenance](https://govcms.gov.au/wiki-maintenance)
- * [GovCMS release process](https://govcms.gov.au/wiki-update-process)
+- `ahoy build` - Builds your project containers from scratch
+- `ahoy install` - Only needs to be run once after the initial `ahoy build`
+- `ahoy up` - Starts your project if it has been stopped
+- `ahoy stop` - Stops your project
 
-## Customising this README
+## Theme settings
 
-If you have cloned this project from GovCMS Gitlab, you may customise this README
-with specific information about your site.
+Use this area to provide any additional information regarding your theme, such as if you are using a CSS compiler or any NPM packages that need to be installed.

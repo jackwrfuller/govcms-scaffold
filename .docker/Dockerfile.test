@@ -2,13 +2,13 @@
 # @see  https://govcms.gov.au/wiki-advanced#docker
 #
 
-ARG CLI_IMAGE
-ARG GOVCMS_IMAGE_VERSION={{ GOVCMS_VERSION }}.x-latest
+ARG GOVCMS_IMAGE_VERSION=11.x-latest
 
-FROM ${CLI_IMAGE} as cli
 FROM govcms/test:${GOVCMS_IMAGE_VERSION}
 
 ENV WEBROOT=web
 
-COPY --from=cli /app /app
+COPY themes/ /app/web/themes/custom
+COPY config /app/config
+COPY favicon.ico /app/web
 COPY tests /app/tests/

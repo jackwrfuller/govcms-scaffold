@@ -32,3 +32,8 @@ docker-compose.override.yml
 
 # Local data directory.
 .data
+.claude
+# Added by the scaffold provisioner.
+web/
+scripts/
+drush/

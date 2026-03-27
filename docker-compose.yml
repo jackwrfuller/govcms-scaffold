@@ -1,14 +1,14 @@
 # This value intentionally matches the project name on Lagoon.
 # It is used to name the CLI_IMAGE to use as a build arg locally.
 x-lagoon-project: &lagoon-project
-  {{ GOVCMS_PROJECT_NAME }}
+  govcms
 
 x-lagoon-local-dev-url: &lagoon-local-dev-url
-  http://{{ GOVCMS_PROJECT_NAME }}.docker.amazee.io
+  http://govcms.docker.amazee.io
 
 # See GOVCMS_IMAGE_VERSION in "Variables" at https://github.com/govCMS/govCMS8/wiki
 x-govcms-image-version: &govcms-image-version
-  ${GOVCMS_IMAGE_VERSION:-{{ GOVCMS_VERSION }}.x-latest}
+  ${GOVCMS_IMAGE_VERSION:-11.x-latest}
 
 x-volumes: &default-volumes
   volumes:
@@ -28,8 +28,8 @@ x-environment: &default-environment
   STAGE_FILE_PROXY_URL: ${STAGE_FILE_PROXY_URL:-}
   LAGOON_ENVIRONMENT_TYPE: ${LAGOON_ENVIRONMENT_TYPE:-}
   LAGOON_PROJECT: *lagoon-project
-  LAGOON_ROUTE: &default-url ${LOCALDEV_URL:-http://{{ GOVCMS_PROJECT_NAME }}.docker.amazee.io}
-  GOVCMS_IMAGE_VERSION: ${GOVCMS_IMAGE_VERSION:-{{ GOVCMS_VERSION }}.x-latest}
+  LAGOON_ROUTE: &default-url ${LOCALDEV_URL:-http://govcms.docker.amazee.io}
+  GOVCMS_IMAGE_VERSION: ${GOVCMS_IMAGE_VERSION:-11.x-latest}
   DEV_MODE: "${DEV_MODE:-false}"
   XDEBUG_ENABLE: ${XDEBUG_ENABLE:-}
   DOCKERHOST: ${DOCKERHOST:-host.docker.internal}
@@ -59,7 +59,7 @@ services:
       lagoon.type: cli-persistent
       lagoon.persistent.name: nginx
       lagoon.persistent: /app/web/sites/default/files/
-      lagoon.base.image: govcms/govcms:${GOVCMS_IMAGE_VERSION:-{{ GOVCMS_VERSION }}.x-latest}
+      lagoon.base.image: govcms/govcms:${GOVCMS_IMAGE_VERSION:-11.x-latest}
     << : *default-volumes
     environment:
       << : *default-environment
@@ -98,7 +98,7 @@ services:
     labels:
       lagoon.type: nginx-php-persistent
       lagoon.persistent: /app/web/sites/default/files/
-      lagoon.base.image: govcms/nginx-drupal:${GOVCMS_IMAGE_VERSION:-{{ GOVCMS_VERSION }}.x-latest}
+      lagoon.base.image: govcms/nginx-drupal:${GOVCMS_IMAGE_VERSION:-11.x-latest}
     << : *default-volumes
     depends_on:
       - cli
@@ -122,7 +122,7 @@ services:
       lagoon.type: nginx-php-persistent
       lagoon.name: nginx
       lagoon.persistent: /app/web/sites/default/files/
-      lagoon.base.image: govcms/php:${GOVCMS_IMAGE_VERSION:-{{ GOVCMS_VERSION }}.x-latest}
+      lagoon.base.image: govcms/php:${GOVCMS_IMAGE_VERSION:-11.x-latest}
     << : *default-volumes
     depends_on:
       - cli
@@ -130,11 +130,11 @@ services:
       << : *default-environment
 
   mariadb:
-    image: ${MARIADB_DATA_IMAGE:-govcms/mariadb-drupal:{{ GOVCMS_VERSION }}.x-latest}
+    image: ${MARIADB_DATA_IMAGE:-govcms/mariadb-drupal:11.x-latest}
     platform: linux/amd64
     labels:
       lagoon.type: mariadb
-      lagoon.image: govcms/mariadb-drupal:{{ GOVCMS_VERSION }}.x-latest
+      lagoon.image: govcms/mariadb-drupal:11.x-latest
     ports:
       - "3306" # Find port on host with `docker compose port mariadb 3306`
     environment:
@@ -155,7 +155,7 @@ services:
   #       LAGOON_IMAGE_VERSION: ${LAGOON_IMAGE_VERSION:-latest}
   #   labels:
   #     lagoon.type: solr
-  #     lagoon.base.image: govcms/solr:${GOVCMS_IMAGE_VERSION:-{{ GOVCMS_VERSION }}.x-latest}
+  #     lagoon.base.image: govcms/solr:${GOVCMS_IMAGE_VERSION:-11.x-latest}
   #   ports:
   #     - "8983" # Find port on host with `docker compose port solr 8983`
   #   depends_on:
